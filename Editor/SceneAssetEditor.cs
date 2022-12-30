@@ -1,46 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[CanEditMultipleObjects]
-[CustomEditor(typeof(SceneAsset))]
-public class SceneAssetEditor : Editor
+namespace GexagonVR.SceneWrapper
 {
-    SceneAsset[] _sceneAssets;
-
-    private void OnEnable()
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(SceneAsset))]
+    public class SceneAssetEditor : Editor
     {
-        _sceneAssets = targets.Select(x => x as SceneAsset).ToArray();
-    }
+        SceneAsset[] _sceneAssets;
 
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        bool GUIEnabledState = GUI.enabled;
-        GUI.enabled = true;
-        if (GUILayout.Button("Create SceneAsset Wrapper"))
+        private void OnEnable()
         {
-            foreach (SceneAsset sceneAsset in _sceneAssets)
-            {
-                SceneWrapper asset = CreateInstance<SceneWrapper>();
-
-                AssetDatabase.TryGetGUIDAndLocalFileIdentifier(sceneAsset, out var sceneGUID, out long _);
-                ISceneWrapperSceneSetter sceneWrapper = asset;
-                sceneWrapper.SetSceneData(sceneAsset.name, SceneUtility.GetBuildIndexByScenePath(AssetDatabase.GetAssetPath(sceneAsset)));
-                sceneWrapper.SetSceneGUID(sceneGUID);
-                asset.name = sceneAsset.name;
-
-                string filePath = Path.ChangeExtension(AssetDatabase.GetAssetPath(sceneAsset), ".asset");
-
-                AssetDatabase.CreateAsset(asset, AssetDatabase.GenerateUniqueAssetPath(filePath));
-                AssetDatabase.SaveAssets();
-            }
+            _sceneAssets = targets.Select(x => x as SceneAsset).ToArray();
         }
-        GUI.enabled = GUIEnabledState;
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            bool GUIEnabledState = GUI.enabled;
+            GUI.enabled = true;
+            if (GUILayout.Button("Create SceneAsset Wrapper"))
+            {
+                foreach (SceneAsset sceneAsset in _sceneAssets)
+                {
+                    SceneWrapper asset = CreateInstance<SceneWrapper>();
+
+                    AssetDatabase.TryGetGUIDAndLocalFileIdentifier(sceneAsset, out var sceneGUID, out long _);
+                    ISceneWrapperSceneSetter sceneWrapper = asset;
+                    sceneWrapper.SetSceneData(sceneAsset.name, SceneUtility.GetBuildIndexByScenePath(AssetDatabase.GetAssetPath(sceneAsset)));
+                    sceneWrapper.SetSceneGUID(sceneGUID);
+                    asset.name = sceneAsset.name;
+
+                    string filePath = Path.ChangeExtension(AssetDatabase.GetAssetPath(sceneAsset), ".asset");
+
+                    AssetDatabase.CreateAsset(asset, AssetDatabase.GenerateUniqueAssetPath(filePath));
+                    AssetDatabase.SaveAssets();
+                }
+            }
+            GUI.enabled = GUIEnabledState;
+        }
     }
 }
