@@ -1,0 +1,18 @@
+{
+    "name": "scene_wrapper_editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:07de13af72adc174ab21599f72a0d8a6"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
