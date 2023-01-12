@@ -30,9 +30,9 @@ namespace GexagonVR.SceneWrapper
             SceneManager.LoadScene(_sceneName);
         }
 
-        public void LoadSceneAsyncByName()
+        public AsyncOperation LoadSceneAsyncByName()
         {
-            SceneManager.LoadScene(_sceneName);
+            return SceneManager.LoadSceneAsync(_sceneName);
         }
 
         public void LoadSceneByBuildIndex()
@@ -40,9 +40,9 @@ namespace GexagonVR.SceneWrapper
             SceneManager.LoadScene(_sceneBuildIndex);
         }
 
-        public void LoadSceneAsyncByBuildIndex()
+        public AsyncOperation LoadSceneAsyncByBuildIndex()
         {
-            SceneManager.LoadScene(_sceneBuildIndex);
+            return SceneManager.LoadSceneAsync(_sceneBuildIndex);
         }
     }
 
