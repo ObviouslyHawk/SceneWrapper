@@ -1,6 +1,6 @@
 {
   "name": "com.gexagon_vr.scene_warpper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "Scene wrapper",
   "description": "Scene Wrapper.\nUsed for referencing scene assets directly.",
   "unity": "2020.3",
