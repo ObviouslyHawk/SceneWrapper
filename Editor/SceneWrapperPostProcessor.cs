@@ -27,7 +27,7 @@ namespace GexagonVR.SceneWrapper
             for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
             {
                 SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath(EditorBuildSettings.scenes[i].path, typeof(SceneAsset)) as SceneAsset;
-                SceneWrapper sceneWrapperInstance = sceneWrapperInstances.First(x => x.SceneGUID == EditorBuildSettings.scenes[i].guid.ToString());
+                SceneWrapper sceneWrapperInstance = sceneWrapperInstances.FirstOrDefault(x => x.SceneGUID == EditorBuildSettings.scenes[i].guid.ToString());
 
                 if (sceneWrapperInstance == null)
                 {
